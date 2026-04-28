@@ -1,15 +1,46 @@
-import { Text, View } from "@/components/Themed";
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function TabOneScreen() {
+type categoria = {
+  nombre: string;
+  fondo: string;
+  texto: string;
+}
+
+const categorias: categoria[] = [
+  { nombre: "beverages", fondo: "blue", texto: "white" },
+  { nombre: "dairies", fondo: "yellow", texto: "black" },
+  { nombre: "snacks", fondo: "pink", texto: "white" },
+  { nombre: "breakfasts", fondo: "orange", texto: "white" },
+  { nombre: "desserts", fondo: "violet", texto: "white" },
+  { nombre: "chocolates", fondo: "black", texto: "white" },
+  { nombre: "biscuits-and-cakes", fondo: "brown", texto: "white" },
+  { nombre: "cereals-and-potatoes", fondo: "green", texto: "white" },
+  { nombre: "meals", fondo: "red", texto: "white" },
+  { nombre: "plant-based-foods", fondo: "green", texto: "white" },
+];
+
+
+export default function Home() {
   return (
     <View style={styles.container}>
-      <View style={styles.fondo} />
+      <Text>BUSCAR</Text>
+      <Text >Segundo texto</Text>
       <View style={styles.contenedorRow}>
-        <View style={styles.contenedorCentral}>
-          <Text>BUS</Text>
-          <View style={{ backgroundColor: "yellow", flex: 1 }} />
-        </View>
+        <Text>Tercero texto</Text>
+        <Pressable onPress={() => alert("Agregado")}>
+          <Text>Agregar</Text>
+        </Pressable>
+      </View>
+      <View>
+        {
+          categorias.map(categoria => {
+            return (
+              <Pressable onPress={() => alert(categoria.nombre)} key={categoria.nombre}>
+                <Text style={{ backgroundColor: categoria.fondo, color: categoria.texto, margin: 10, borderRadius: 8, textAlign: "center" }}>{categoria.nombre}</Text>
+              </Pressable>
+            )
+          })
+        }
       </View>
     </View>
   );
@@ -19,25 +50,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     flex: 1,
-  },
-  fondo: {
-    backgroundColor: "red",
-    position: "absolute",
-    height: "30%",
-    width: "100%",
+    alignItems: "center",
   },
   contenedorRow: {
     flexDirection: "row",
-    flex: 1,
     backgroundColor: "transparent",
-    justifyContent: "center",
-  },
-  contenedorCentral: {
-    backgroundColor: "blue",
-    width: "80%",
-    height: "100%",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    flexDirection: "column",
-  },
+    gap: 200,
+  }
 });
