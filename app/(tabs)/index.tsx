@@ -1,31 +1,43 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import { Text, View } from "@/components/Themed";
+import { StyleSheet } from "react-native";
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <View style={styles.fondo} />
+      <View style={styles.contenedorRow}>
+        <View style={styles.contenedorCentral}>
+          <Text>BUS</Text>
+          <View style={{ backgroundColor: "yellow", flex: 1 }} />
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "column",
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  fondo: {
+    backgroundColor: "red",
+    position: "absolute",
+    height: "30%",
+    width: "100%",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  contenedorRow: {
+    flexDirection: "row",
+    flex: 1,
+    backgroundColor: "transparent",
+    justifyContent: "center",
+  },
+  contenedorCentral: {
+    backgroundColor: "blue",
+    width: "80%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   },
 });
