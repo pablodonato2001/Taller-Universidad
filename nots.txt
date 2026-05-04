@@ -1,0 +1,212 @@
+═══════════════════════════════════════════════════
+PARTE 1 — DETECCIÓN DEL ESTADO DEL PROYECTO
+═══════════════════════════════════════════════════
+
+Antes de hacer cualquier cosa, analizá el proyecto abierto en el IDE y determiná cuál de estos dos escenarios aplica:
+
+ESCENARIO A — El proyecto ya existe (hay archivos de código, package.json, estructura de carpetas, etc.):
+→ Realizá un análisis completo y exhaustivo del proyecto siguiendo esta estructura de reporte:
+
+  1. STACK DETECTADO
+     - Framework principal y versión
+     - Lenguaje: TypeScript o JavaScript
+     - Dependencias relevantes (router, state management, estilos, testing, etc.)
+     - Herramientas de configuración (vite, webpack, metro, turbopack, etc.)
+
+  2. ESTRUCTURA DEL PROYECTO
+     - Describí la organización de carpetas y archivos
+     - Identificá el patrón arquitectónico usado (si hay alguno)
+     - Señalá archivos de configuración presentes (tsconfig, eslint, prettier, env, etc.)
+
+  3. REPORTE DE BUENAS PRÁCTICAS — ESTADO ACTUAL
+     Para cada práctica listada en la PARTE 2 y en el bloque de stack correspondiente de la PARTE 3:
+     - APLICADA: la práctica está correctamente implementada
+     - PARCIAL: está implementada en algunos lugares pero no en todos
+     - AUSENTE: no está implementada en ningún lugar
+     - NO APLICA: la práctica no corresponde a este stack o proyecto
+
+  4. PLAN DE ACCIÓN PRIORIZADO
+     Listá en orden de impacto qué hay que corregir o implementar, con una línea explicando el por qué de cada ítem.
+
+  5. PREGUNTAS (solo si algo es ambiguo)
+     Si hay decisiones de arquitectura que no se pueden inferir del código, hacé las preguntas necesarias antes de continuar.
+
+ESCENARIO B — El proyecto no existe o está completamente vacío:
+→ No generes código todavía. Primero hacé las siguientes preguntas una por una, esperando respuesta antes de continuar:
+
+  1. ¿Qué tipo de aplicación vas a construir? (web, mobile, API, fullstack)
+  2. ¿Qué framework o stack querés usar? (React, Next.js, React Native/Expo, Vue/Nuxt, SvelteKit, Node/Express, u otro)
+  3. ¿Usás TypeScript o JavaScript?
+  4. ¿Tenés preferencia de estructura de carpetas o arranco con la convención estándar del framework?
+  5. ¿Qué funcionalidades principales va a tener? (para definir dependencias desde el inicio)
+
+  Una vez respondidas todas las preguntas, inicializá el proyecto aplicando TODAS las buenas prácticas de la PARTE 2 y del bloque correspondiente de la PARTE 3 desde el primer archivo.
+
+
+═══════════════════════════════════════════════════
+PARTE 2 — BUENAS PRÁCTICAS UNIVERSALES
+(aplican a cualquier proyecto, independientemente del stack)
+═══════════════════════════════════════════════════
+
+Las siguientes reglas deben estar presentes en TODO proyecto. Verificalas en el análisis y aplicalas en el desarrollo:
+
+1. TIPADO
+   - Si el proyecto usa TypeScript: activar "strict": true en tsconfig.json sin excepciones.
+   - Tipar TODOS los props, parámetros de funciones y retornos no obvios.
+   - Nunca usar "any". Si el tipo es desconocido, usar "unknown" y hacer la verificación correspondiente.
+   - Si el proyecto usa JavaScript: usar JSDoc para documentar al menos las funciones públicas y los objetos de datos principales.
+
+2. ESTRUCTURA DE CARPETAS
+   - Separar claramente: componentes de UI, lógica de negocio, llamadas a APIs/servicios, tipos/interfaces, constantes, utilidades y assets.
+   - Los componentes reutilizables nunca deben vivir mezclados con las pantallas o páginas.
+   - Carpeta sugerida para componentes: src/components/. Para servicios: src/services/. Para tipos: src/types/. Para constantes: src/constants/.
+
+3. SEPARACIÓN DE LÓGICA Y VISTA
+   - En cada componente o pantalla: primero toda la lógica (hooks, variables derivadas, funciones manejadoras), luego el return con el JSX/template.
+   - Las funciones manejadoras de eventos deben tener nombres descriptivos (handleSubmit, navToDetail, onFilterChange) y definirse fuera del JSX, nunca inline salvo que sean de una sola línea trivial.
+   - La lógica de negocio compleja debe extraerse a hooks personalizados (useX) o funciones utilitarias externas, nunca vivir dentro del componente.
+
+4. GESTIÓN DE RUTAS Y NAVEGACIÓN
+   - Nunca escribir rutas como strings sueltos en los componentes.
+   - Centralizar todas las rutas en un archivo dedicado (ej: src/constants/routes.ts o src/navigation/routes.ts).
+   - Si el lenguaje es TypeScript, usar "as const" en el objeto de rutas para habilitar autocompletado y detección de errores en tiempo de compilación.
+
+5. LLAMADAS A APIS Y DATOS ASINCRÓNICOS
+   - Toda llamada a una API externa debe vivir en una capa de servicios separada, no dentro de los componentes.
+   - Siempre manejar los tres estados: cargando (loading), éxito (data) y error.
+   - Nunca hacer fetch directamente en el cuerpo del componente sin un hook o efecto que lo controle.
+
+6. MANEJO DE ESTADO
+   - Usar el estado local (useState o equivalente) solo para datos que son exclusivos de ese componente.
+   - Si dos o más componentes necesitan el mismo dato, aplicar "lifting state up": el estado sube al padre común y se pasa como prop.
+   - Para estado global (sesión, tema, carrito, etc.) usar la solución adecuada al framework (Context, Zustand, Pinia, Svelte stores, etc.).
+
+7. RENDERIZADO CONDICIONAL
+   - Usar && para mostrar algo solo si se cumple una condición.
+   - Usar el operador ternario ? : para alternar entre dos vistas.
+   - Extraer la lógica condicional compleja a variables antes del return, nunca aninarla profundamente dentro del JSX/template.
+
+8. RENDERIZADO DE LISTAS
+   - Siempre proveer una key única a cada elemento de una lista. Preferir IDs del dato; usar el índice solo en listas estáticas que nunca cambiarán de orden.
+   - Para listas largas o dinámicas, usar virtualización si el framework lo permite.
+
+9. COMPONENTES CONTROLADOS (FORMULARIOS)
+   - Todos los inputs de formularios deben ser controlados: el estado es la única fuente de verdad.
+   - Validar el input en el manejador de cambio cuando corresponda.
+   - Separar la lógica de validación del componente de UI.
+
+10. ALIAS DE IMPORTACIÓN
+    - Configurar y usar siempre un alias (@ o ~) que apunte a la raíz del proyecto.
+    - Nunca usar rutas relativas con múltiples niveles (../../).
+    - Aplica a todas las importaciones internas sin excepción.
+
+11. VARIABLES DE ENTORNO
+    - Nunca hardcodear URLs de APIs, claves, tokens o configuraciones que varíen entre entornos.
+    - Usar archivos .env y acceder a los valores a través de las variables de entorno del framework.
+    - El archivo .env nunca debe commitearse al repositorio; siempre debe estar en .gitignore.
+
+12. NOMENCLATURA
+    - Componentes y clases: PascalCase.
+    - Funciones, variables, props: camelCase.
+    - Constantes globales: SCREAMING_SNAKE_CASE.
+    - Archivos de componentes: PascalCase. Archivos de utilidades/hooks/servicios: camelCase.
+    - Los nombres deben ser descriptivos y autoexplicativos; evitar abreviaciones ambiguas.
+
+13. CLOSURES PARA HANDLERS CON PARÁMETROS
+    - Cuando un manejador necesita un parámetro dinámico (ej: el id de un item en una lista), usar el patrón de closure: onPress={handleItem(item.id)} donde handleItem es una función que devuelve otra función.
+    - Nunca ejecutar una función directamente en el JSX donde se espera un callback.
+
+14. DEBUGGING Y CALIDAD
+    - No dejar console.log() en código de producción; usar herramientas de logging adecuadas o removerlos antes de hacer commit.
+    - Configurar ESLint y Prettier desde el inicio del proyecto para mantener consistencia de estilo.
+
+
+═══════════════════════════════════════════════════
+PARTE 3 — BLOQUES CONDICIONALES POR STACK
+(activá solo el bloque que corresponda al stack detectado)
+═══════════════════════════════════════════════════
+
+── BLOQUE: REACT (web, sin framework de routing propio) ──────────────
+
+- Usar React Router v6+ con createBrowserRouter. Definir todas las rutas en un archivo central.
+- Separar los componentes en: pages/ (pantallas completas), components/ (piezas reutilizables) y layouts/ (estructuras compartidas).
+- Usar lazy() y Suspense para code splitting en rutas.
+- Memoizar componentes costosos con React.memo solo cuando hay evidencia de re-renders innecesarios, no preventivamente.
+- Usar useCallback para funciones que se pasan como props a componentes memoizados.
+- Usar useMemo para cálculos costosos que dependen de dependencias específicas.
+- Preferir CSS Modules o soluciones de CSS-in-JS sobre estilos globales para evitar colisiones.
+- Los custom hooks deben vivir en src/hooks/ y su nombre siempre empieza con "use".
+
+── BLOQUE: REACT NATIVE + EXPO ───────────────────────────────────────
+
+- Usar expo-router con file-based routing: la estructura de carpetas en app/ define las rutas automáticamente.
+- Usar _layout.tsx para layouts compartidos (Stack, Tabs). Usar grupos con paréntesis (ej: (tabs)/) para organizar sin afectar la URL.
+- Usar corchetes para rutas dinámicas (ej: [id].tsx). Habilitar typedRoutes: true en app.json.
+- NUNCA poner componentes reutilizables dentro de app/; van en src/components/.
+- Archivos especiales: prefijo _ para layouts, prefijo + para archivos del sistema (+not-found.tsx).
+- Centralizar rutas en src/navigation/routes.ts con un objeto ROUTES y "as const". Implementar buildRoute() para rutas dinámicas.
+- Usar router.push() para navegación apilable, router.replace() para flujos secuenciales (formularios, post-login), router.back() para volver.
+- Tipar los parámetros de rutas dinámicas con un tipo local y useLocalSearchParams().
+- Usar FlatList en lugar de .map() para listas largas o dinámicas. Siempre implementar keyExtractor.
+- En StyleSheet.create(): todos los estilos estáticos van ahí, al final del archivo. Los overrides dinámicos van como segundo elemento en un array de estilos.
+- Recordar que flexDirection por defecto en React Native es "column", no "row".
+- Usar Platform.OS o Platform.select() para diferencias entre iOS y Android.
+- Las imágenes remotas siempre deben tener width y height explícitos.
+- "main" en package.json debe apuntar a "expo-router/entry".
+- Configurar scheme, orientation y userInterfaceStyle: "automatic" en app.json.
+
+── BLOQUE: NEXT.JS ───────────────────────────────────────────────────
+
+- Usar App Router (app/) en proyectos nuevos. Evitar Pages Router salvo que sea un proyecto existente que ya lo usa.
+- Distinguir claramente entre Server Components (por defecto) y Client Components ("use client" explícito). Un componente debe ser cliente solo si necesita estado, efectos o eventos del browser.
+- No usar "use client" en el nivel raíz de la aplicación; aplicarlo solo en la hoja del árbol que realmente lo necesita.
+- Usar Server Actions para mutaciones de datos en lugar de API routes cuando sea posible.
+- Usar next/image para todas las imágenes: nunca  nativo.
+- Usar next/link para toda navegación interna: nunca  nativo.
+- Usar next/font para cargar fuentes: nunca importar fuentes desde CDN externo en el layout.
+- Las rutas de API van en app/api/[ruta]/route.ts con los métodos HTTP como funciones exportadas nombradas (GET, POST, etc.).
+- Archivos de metadata, loading.tsx, error.tsx y not-found.tsx deben existir en cada segmento relevante.
+- Variables de entorno del servidor: sin prefijo. Variables expuestas al cliente: prefijo NEXT_PUBLIC_.
+── BLOQUE: VUE / NUXT ────────────────────────────────────────────────
+
+- Usar Composition API con <script setup> en todos los componentes. Nunca Options API en proyectos nuevos.
+- Tipar los props con defineProps<TipoProps>() y los emits con defineEmits<TipoEmits>().
+- Usar composables (useX) en src/composables/ para lógica reutilizable, equivalente a los custom hooks de React.
+- En Nuxt: aprovechar el file-based routing de pages/. Usar layouts/ para estructuras compartidas y middleware/ para guards de navegación.
+- Usar Pinia para estado global. Nunca Vuex en proyectos nuevos.
+- Preferir defineStore con Composition API dentro del store.
+- Usar <NuxtLink> para navegación interna en Nuxt. Nunca <a> nativo.
+- Usar <NuxtImage> o <NuxtImg> para imágenes en Nuxt.
+- Las llamadas a APIs en Nuxt deben usar useFetch() o useAsyncData() en lugar de fetch directo, para aprovechar el SSR y el caché automático.
+
+
+── BLOQUE: SVELTEKIT ─────────────────────────────────────────────────
+
+- Usar file-based routing de SvelteKit: la estructura de src/routes/ define las rutas.
+- Cada ruta puede tener +page.svelte (vista), +page.ts o +page.server.ts (load), +layout.svelte (layout) y +error.svelte (errores).
+- Usar load() en +page.server.ts para fetching de datos en el servidor. Retornar los datos como props a la página.
+- Usar form actions en +page.server.ts para mutaciones. Evitar llamadas fetch desde el cliente para operaciones que pueden hacerse en servidor.
+- Usar stores de Svelte (writable, readable, derived) para estado compartido. Para estado del servidor, usar $page y $navigating de $app/stores.
+- Tipar los datos de load() y las form actions con PageLoad, PageServerLoad, Actions de ./$types.
+- Usar <a> nativo para navegación (SvelteKit lo intercepta automáticamente). Usar goto() de $app/navigation para navegación programática.
+- Variables de entorno privadas: $env/static/private o $env/dynamic/private. Públicas: $env/static/public.
+
+
+── BLOQUE: NODE.JS / EXPRESS ─────────────────────────────────────────
+
+- Organizar el proyecto en capas: routes/ (definición de endpoints), controllers/ (manejo de requests/responses), services/ (lógica de negocio), repositories/ o models/ (acceso a datos).
+- La lógica de negocio nunca debe vivir en los controllers ni en las routes directamente.
+- Usar middleware para validación, autenticación, logging y manejo de errores de forma centralizada.
+- Implementar un manejador de errores global como último middleware: (err, req, res, next).
+- Nunca exponer stack traces o mensajes de error internos en las respuestas de producción.
+- Validar y sanitizar SIEMPRE los datos de entrada (body, params, query) antes de procesarlos. Usar librerías como zod o joi.
+- Usar variables de entorno para toda configuración (puertos, URLs de DB, secretos). Nunca hardcodear.
+- Manejar el cierre limpio del servidor (graceful shutdown) ante señales SIGTERM y SIGINT.
+- Si se usa TypeScript: tipar explícitamente Request y Response con los genéricos de Express cuando se extienden con datos custom.
+
+
+═══════════════════════════════════════════════════
+FIN DEL PROMPT — a partir de aquí describí tu tarea
+═══════════════════════════════════════════════════
+
+[Escribí acá qué querés hacer: una nueva feature, refactorizar algo, iniciar el proyecto, revisar un archivo puntual, etc.]

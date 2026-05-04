@@ -1,32 +1,49 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { FC } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type BotonCategoriaProps = {
-    nombre: string;
-    fondo?: string;
-    texto?: string;
-}
+  nombre: string;
+  onPress: () => void;
+  fondo?: string;
+  texto?: string;
+};
 
-
-const BotonCategoria: FC<BotonCategoriaProps> = ({ nombre, fondo = "black", texto = "white" }) => {
-    return (
-        <View style={[styles.container, { backgroundColor: fondo }]}>
-            <Text style={{ color: texto }}>{nombre}</Text>
+export const BotonCategoria: FC<BotonCategoriaProps> = ({
+  nombre,
+  fondo = "black",
+  texto = "white",
+  onPress,
+}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}>
+      <LinearGradient
+        colors={[fondo, '#ffffff']}
+        start={{ x: 1, y: 1 }}
+        end={{ x: -1, y: -1 }}
+        style={styles.tarjeta}
+      >
+        <View style={{ flex: 1, justifyContent: "flex-end", flexDirection: "row" }}>
+          <Text>Icono</Text>
         </View>
-    )
-}
+        <View style={{ flex: 2 }}>
 
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={{ color: texto }}>{nombre}</Text>
+        </View>
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: "column",
-        flex: 1
-    },
-    contenedorRow: {
-        flexDirection: "row",
-        backgroundColor: "transparent",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 200,
-    }
-}); 
+  tarjeta: {
+    width: 150,
+    marginBottom: 25,
+    height: 150,
+    borderRadius: 20,
+    padding: 16,
+  }
+});

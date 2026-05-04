@@ -1,10 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { BotonCategoria } from "@/components/BotonCategoria";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 type categoria = {
   nombre: string;
   fondo: string;
   texto: string;
-}
+};
 
 const categorias: categoria[] = [
   { nombre: "beverages", fondo: "blue", texto: "white" },
@@ -19,38 +20,38 @@ const categorias: categoria[] = [
   { nombre: "plant-based-foods", fondo: "green", texto: "white" },
 ];
 
-
 export default function Home() {
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text>BUSCAR</Text>
-      <Text >Segundo texto</Text>
+      <Text>Segundo texto</Text>
       <View style={styles.contenedorRow}>
         <Text>Tercero texto</Text>
         <Pressable onPress={() => alert("Agregado")}>
           <Text>Agregar</Text>
         </Pressable>
       </View>
-      <View>
-        {
-          categorias.map(categoria => {
-            return (
-              <Pressable onPress={() => alert(categoria.nombre)} key={categoria.nombre}>
-                <Text style={{ backgroundColor: categoria.fondo, color: categoria.texto, margin: 10, borderRadius: 8, textAlign: "center" }}>{categoria.nombre}</Text>
-              </Pressable>
-            )
-          })
-        }
+      <View style={styles.prueba}>
+        {categorias.map((cat) => (
+          <BotonCategoria
+            key={cat.nombre}
+            onPress={() => alert(cat.nombre)}
+            nombre={cat.nombre}
+            fondo={cat.fondo}
+            texto={cat.texto}
+          />
+        ))}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    flex: 1,
     alignItems: "center",
+    paddingVertical: 16,
+    paddingHorizontal: 5,
   },
   contenedorRow: {
     flexDirection: "row",
@@ -58,5 +59,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     gap: 200,
+  },
+  prueba: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 30,
   }
 });
