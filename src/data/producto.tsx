@@ -16,7 +16,7 @@ type InformacionNutricional = {
 type itemD = {
   nombre: string;
   id: string;
-  imagen: string;
+  imagen: any;
   marca: (typeof marcasD)[number];
   categoria: (typeof categoriasD)[number];
   etiqueta: (typeof etiquetasD)[number];
@@ -28,8 +28,8 @@ export const productosD: itemD[] = [
   {
     nombre: "Manteca Clasica",
     id: "7793940054006",
-    imagen: "7793940054006.jpg",
-    marca: marcasD[6],
+    imagen: require("@/src/assets/7793940054006.jpg"),
+    marca: marcasD[10],
     categoria: categoriasD[1],
     etiqueta: etiquetasD[0],
     ingredientes:

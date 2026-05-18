@@ -62,7 +62,7 @@ export const marcasD: itemD[] = [
   },
 
   {
-    item: { id: "la-serenisima", nombre: "La serenisima" },
+    item: { id: "la-serenisima", nombre: "La Serenisima" },
     fondo: "blue",
     texto: "white",
   },

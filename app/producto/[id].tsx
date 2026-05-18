@@ -1,5 +1,7 @@
+import { productosD } from "@/src/data/producto";
+import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 type productoParams = {
   id: string;
@@ -8,19 +10,29 @@ type productoParams = {
 export default function ProductoScreen() {
   const { id } = useLocalSearchParams<productoParams>();
 
+  const producto = productosD.find((p) => p.id === id);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{id}</Text>
-      <Text style={styles.description}>
-        Este es el apartado de {id} de esta producto.
-      </Text>
-    </View>
+    <ScrollView
+      style={{ width: "100%", height: "100%", backgroundColor: "red" }}
+    >
+      <View style={{ width: "100%", height: 300, backgroundColor: "red" }}>
+        <Image
+          source={producto?.imagen}
+          resizeMode="cover"
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      </View>
+      <View style={{ width: "100%", height: 300, backgroundColor: "" }}></View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 24,
