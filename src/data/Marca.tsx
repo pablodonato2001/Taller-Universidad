@@ -60,4 +60,10 @@ export const marcasD: itemD[] = [
     fondo: "green",
     texto: "black",
   },
+
+  {
+    item: { id: "la-serenisima", nombre: "La serenisima" },
+    fondo: "blue",
+    texto: "white",
+  },
 ];

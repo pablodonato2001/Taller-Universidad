@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type BotonEtiquetaProps = {
   nombre: string;
@@ -15,12 +15,14 @@ export const BotonEtiquetas: FC<BotonEtiquetaProps> = ({
   onPress,
 }) => {
   return (
-    <Pressable
-      style={[styles.tarjeta, { backgroundColor: fondo }]}
-      onPress={onPress}
-    >
-      <Text style={{ color: texto }}> {nombre}</Text>
-    </Pressable>
+    <View style={styles.prueba}>
+      <Pressable
+        style={[styles.tarjeta, { backgroundColor: fondo }]}
+        onPress={onPress}
+      >
+        <Text style={{ color: texto }}> {nombre}</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -28,6 +30,9 @@ const styles = StyleSheet.create({
   tarjeta: {
     borderRadius: 30,
     padding: 13,
-    marginBottom: 12,
+  },
+  prueba: {
+    paddingVertical: 5,
+    marginHorizontal: 10,
   },
 });

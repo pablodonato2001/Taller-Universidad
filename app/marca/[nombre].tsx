@@ -12,7 +12,7 @@ export default function MarcaScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>{nombre}</Text>
       <Text style={styles.description}>
-        Este es el apartado de {nombre} de esta categoria.
+        Este es el apartado de {nombre} de esta marca.
       </Text>
     </View>
   );

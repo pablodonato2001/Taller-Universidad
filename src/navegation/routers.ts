@@ -5,6 +5,7 @@ export const ROUTES = {
   CATEGORIA: "/categoria/[nombre]",
   ETIQUETA: "/etiqueta/[nombre]",
   MARCA: "/marca/[nombre]",
+  PRODUCTO: "/producto/[id]",
   FAVORITOS: "/favoritos",
 } as const;
 

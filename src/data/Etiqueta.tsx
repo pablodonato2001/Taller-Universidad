@@ -11,52 +11,52 @@ type itemD = {
 
 export const etiquetasD: itemD[] = [
   {
-    item: { id: "organic", nombre: "organic" },
+    item: { id: "organico", nombre: "orgánico" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "vegan", nombre: "vegan" },
+    item: { id: "vegano", nombre: "vegano" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "vegetarian", nombre: "vegetarian" },
+    item: { id: "vegetariano", nombre: "vegetariano" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "gluten-free", nombre: "gluten-free" },
+    item: { id: "sin-gluten", nombre: "sin gluten" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "no-added-sugar", nombre: "no-added-sugar" },
+    item: { id: "sin-azucar-anadida", nombre: "sin azúcar añadida" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "fair-trade", nombre: "fair-trade" },
+    item: { id: "comercio-justo", nombre: "comercio justo" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "lactose-free", nombre: "lactose-free" },
+    item: { id: "sin-lactosa", nombre: "sin lactosa" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "palm-oil-free", nombre: "palm-oil-free" },
+    item: { id: "sin-aceite-de-palma", nombre: "sin aceite de palma" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "high-fiber", nombre: "high-fiber" },
+    item: { id: "alto-en-fibra", nombre: "alto en fibra" },
     fondo: "#c6e9be",
     texto: "black",
   },
   {
-    item: { id: "low-fat", nombre: "low-fat" },
+    item: { id: "bajo-en-grasa", nombre: "bajo en grasa" },
     fondo: "#c6e9be",
     texto: "black",
   },

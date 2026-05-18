@@ -41,6 +41,36 @@ export default function TabsDemoLayout() {
         }}
       />
       <Tabs.Screen
+        name="busqueda"
+        options={{
+          title: "busqueda",
+          headerTitle: "busqueda",
+          tabBarLabel: "",
+          tabBarActiveTintColor: "green",
+          tabBarInactiveTintColor: "grey",
+          tabBarIcon: ({ color, size, focused }) => (
+            <View
+              style={[
+                styles.iconContainer,
+                {
+                  backgroundColor: focused ? color : "transparent",
+                  marginTop: size,
+                },
+              ]}
+            >
+              <Ionicons
+                name={focused ? "search" : "search-outline"}
+                size={size}
+                color={focused ? "white" : color}
+              />
+              {!focused && (
+                <Text style={[styles.texto, { color: color }]}>busqueda</Text>
+              )}
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="favoritos"
         options={{
           title: "Favoritos",

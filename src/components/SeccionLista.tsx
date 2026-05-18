@@ -40,9 +40,9 @@ export function seccionLista({ titulo, items, ruta }: seccionList) {
   return (
     <View>
       <View style={styles.contenedorRow}>
-        <Text>{titulo}</Text>
+        <Text style={styles.titulo}>{titulo}</Text>
       </View>
-      <View style={styles.categorias}>
+      <View style={styles.items}>
         {items.map((item) => (
           <Boton
             key={item.item.id}
@@ -65,10 +65,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 200,
   },
-  categorias: {
+  items: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
-    padding: 30,
+    justifyContent: "flex-start",
+    marginTop: 15,
+  },
+  titulo: {
+    fontSize: 28,
+    paddingTop: 30,
+    fontWeight: "bold",
   },
 });

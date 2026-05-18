@@ -1,18 +1,18 @@
 import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
-type etiquetaParams = {
-  nombre: string;
+type productoParams = {
+  id: string;
 };
 
-export default function EtiquetaScreen() {
-  const { nombre } = useLocalSearchParams<etiquetaParams>();
+export default function ProductoScreen() {
+  const { id } = useLocalSearchParams<productoParams>();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{nombre}</Text>
+      <Text style={styles.title}>{id}</Text>
       <Text style={styles.description}>
-        Este es el apartado de {nombre} de esta etiqueta.
+        Este es el apartado de {id} de esta producto.
       </Text>
     </View>
   );

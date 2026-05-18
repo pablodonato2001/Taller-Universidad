@@ -23,7 +23,13 @@ export const BotonMarcas: FC<BotonMarcasProps> = ({
         end={{ x: -1, y: -1 }}
         style={styles.redondo}
       >
-        <Text style={{ color: texto, fontWeight: "bold" }}>{nombre}</Text>
+        <Text
+          style={{ color: texto, fontWeight: "bold", textAlign: "center" }}
+          adjustsFontSizeToFit
+          numberOfLines={1}
+        >
+          {nombre}
+        </Text>
       </LinearGradient>
       <Text style={{ color: "black", fontWeight: "bold" }}> {nombre}</Text>
     </Pressable>
@@ -45,6 +51,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
   redondo: {
     width: 75,
@@ -53,5 +61,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    padding: 5,
   },
 });

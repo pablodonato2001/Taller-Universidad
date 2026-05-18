@@ -3,7 +3,7 @@ type item = {
   id: string;
 };
 
-type itemD = {
+export type itemD = {
   item: item;
   fondo: string;
   texto: string;
@@ -11,12 +11,12 @@ type itemD = {
 
 export const categoriasD: itemD[] = [
   {
-    item: { id: "beverages", nombre: "beverages" },
-    fondo: "blue",
-    texto: "white",
+    item: { id: "bebidas", nombre: "bebidas" },
+    fondo: "#87CEEB",
+    texto: "black",
   },
   {
-    item: { id: "dairies", nombre: "dairies" },
+    item: { id: "lacteos", nombre: "lácteos" },
     fondo: "yellow",
     texto: "black",
   },
@@ -26,12 +26,12 @@ export const categoriasD: itemD[] = [
     texto: "black",
   },
   {
-    item: { id: "breakfasts", nombre: "breakfasts" },
+    item: { id: "desayunos", nombre: "desayunos" },
     fondo: "orange",
     texto: "white",
   },
   {
-    item: { id: "desserts", nombre: "desserts" },
+    item: { id: "postres", nombre: "postres" },
     fondo: "violet",
     texto: "white",
   },
@@ -41,36 +41,36 @@ export const categoriasD: itemD[] = [
     texto: "white",
   },
   {
-    item: { id: "biscuits-and-cakes", nombre: "biscuits-and-cakes" },
+    item: { id: "galletas-y-pasteles", nombre: "galletas y pasteles" },
     fondo: "brown",
     texto: "white",
   },
   {
-    item: { id: "cereals-and-potatoes", nombre: "cereals-and-potatoes" },
+    item: { id: "cereales-y-papas", nombre: "cereales y papas" },
     fondo: "green",
     texto: "white",
   },
   {
-    item: { id: "meals", nombre: "meals" },
+    item: { id: "comidas", nombre: "comidas" },
     fondo: "red",
     texto: "white",
   },
   {
-    item: { id: "plant-based-foods", nombre: "plant-based-foods" },
+    item: { id: "alimentos-vegetales", nombre: "alimentos vegetales" },
     fondo: "green",
     texto: "white",
   },
 ];
 
 // export const items: item[] = [
-//     { nombre: "beverages", fondo: "blue", texto: "white" },
-//     { nombre: "dairies", fondo: "yellow", texto: "black" },
+//     { nombre: "bebidas", fondo: "blue", texto: "white" },
+//     { nombre: "lácteos", fondo: "yellow", texto: "black" },
 //     { nombre: "snacks", fondo: "pink", texto: "white" },
-//     { nombre: "breakfasts", fondo: "orange", texto: "white" },
-//     { nombre: "desserts", fondo: "violet", texto: "white" },
+//     { nombre: "desayunos", fondo: "orange", texto: "white" },
+//     { nombre: "postres", fondo: "violet", texto: "white" },
 //     { nombre: "chocolates", fondo: "black", texto: "white" },
-//     { nombre: "biscuits-and-cakes", fondo: "brown", texto: "white" },
-//     { nombre: "cereals-and-potatoes", fondo: "green", texto: "white" },
-//     { nombre: "meals", fondo: "red", texto: "white" },
-//     { nombre: "plant-based-foods", fondo: "green", texto: "white" },
+//     { nombre: "galletas y pasteles", fondo: "brown", texto: "white" },
+//     { nombre: "cereales y papas", fondo: "green", texto: "white" },
+//     { nombre: "comidas", fondo: "red", texto: "white" },
+//     { nombre: "alimentos vegetales", fondo: "green", texto: "white" },
 // ];
