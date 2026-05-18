@@ -1,47 +1,29 @@
-import { BotonCategoria } from "@/components/BotonCategoria";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-
-type categoria = {
-  nombre: string;
-  fondo: string;
-  texto: string;
-};
-
-const categorias: categoria[] = [
-  { nombre: "beverages", fondo: "blue", texto: "white" },
-  { nombre: "dairies", fondo: "yellow", texto: "black" },
-  { nombre: "snacks", fondo: "pink", texto: "white" },
-  { nombre: "breakfasts", fondo: "orange", texto: "white" },
-  { nombre: "desserts", fondo: "violet", texto: "white" },
-  { nombre: "chocolates", fondo: "black", texto: "white" },
-  { nombre: "biscuits-and-cakes", fondo: "brown", texto: "white" },
-  { nombre: "cereals-and-potatoes", fondo: "green", texto: "white" },
-  { nombre: "meals", fondo: "red", texto: "white" },
-  { nombre: "plant-based-foods", fondo: "green", texto: "white" },
-];
+import { seccionLista } from "@/src/components/SeccionLista";
+import { categoriasD } from "@/src/data/categotia";
+import { etiquetasD } from "@/src/data/Etiqueta";
+import { marcasD } from "@/src/data/Marca";
+import { ScrollView, StyleSheet, Text } from "react-native";
 
 export default function Home() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text>BUSCAR</Text>
-      <Text>Segundo texto</Text>
-      <View style={styles.contenedorRow}>
-        <Text>Tercero texto</Text>
-        <Pressable onPress={() => alert("Agregado")}>
-          <Text>Agregar</Text>
-        </Pressable>
-      </View>
-      <View style={styles.prueba}>
-        {categorias.map((cat) => (
-          <BotonCategoria
-            key={cat.nombre}
-            onPress={() => alert(cat.nombre)}
-            nombre={cat.nombre}
-            fondo={cat.fondo}
-            texto={cat.texto}
-          />
-        ))}
-      </View>
+      <Text style={{ padding: 10 }}>BUSCAR</Text>
+      <Text style={{ padding: 10 }}>Segundo texto</Text>
+      {seccionLista({
+        titulo: "Categorias",
+        items: categoriasD,
+        ruta: "/categoria/[nombre]",
+      })}
+      {seccionLista({
+        titulo: "Etiquetas",
+        items: etiquetasD,
+        ruta: "/etiqueta/[nombre]",
+      })}
+      {seccionLista({
+        titulo: "Marcas",
+        items: marcasD,
+        ruta: "/marca/[nombre]",
+      })}
     </ScrollView>
   );
 }
@@ -60,10 +42,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 200,
   },
-  prueba: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    padding: 30,
-  }
 });

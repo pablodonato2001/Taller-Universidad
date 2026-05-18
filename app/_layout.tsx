@@ -5,12 +5,12 @@ export default function RootLayout() {
     <Stack
       screenOptions={{
         headerShown: true,
-        headerTitle: "ALIMENTO",
-        headerTintColor: "red",
-        headerStyle: { backgroundColor: "lightgray" },
+        headerTitle: "HOME",
+        headerTintColor: "green",
+        headerStyle: { backgroundColor: "white" },
       }}
     >
-      <Stack.Screen name="index" options={{}} />
+      <Stack.Screen name="(tabs)" options={{}} />
     </Stack>
   );
 }
