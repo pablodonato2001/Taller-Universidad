@@ -13,7 +13,13 @@ type InformacionNutricional = {
   sal: string;
 };
 
-type itemD = {
+type Clasificacion = {
+  nutriScore?: string;
+  novaGrupo?: number;
+  EcoScore?: string;
+};
+
+export type ProductoD = {
   nombre: string;
   id: string;
   imagen: any;
@@ -21,10 +27,11 @@ type itemD = {
   categoria: (typeof categoriasD)[number];
   etiqueta: (typeof etiquetasD)[number];
   ingredientes: string;
+  clasificacion?: Clasificacion;
   informacionNutricional?: InformacionNutricional;
 };
 
-export const productosD: itemD[] = [
+export const productosD: ProductoD[] = [
   {
     nombre: "Manteca Clasica",
     id: "7793940054006",
@@ -34,8 +41,13 @@ export const productosD: itemD[] = [
     etiqueta: etiquetasD[0],
     ingredientes:
       "Crema de leche: 62.5% (estimación) Productos lácteos: 18.8% (estimación) Aceite vegetal: 9.4% (estimación) Cloruro de sodio: 9.4% (estimación) ",
+    clasificacion: {
+      nutriScore: "E",
+      novaGrupo: 2,
+      EcoScore: "E",
+    },
     informacionNutricional: {
-      energia: "46 kcal / 193 kJ",
+      energia: "193 kJ",
       grasas: "1.5g",
       grasasSaturadas: "0.2g",
       carbohidratos: "6.7g",

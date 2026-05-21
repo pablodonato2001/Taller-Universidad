@@ -14,6 +14,7 @@ type itemD = {
   item: item;
   fondo: string;
   texto: string;
+  imagen?: string;
 };
 
 type seccionList = {
@@ -49,6 +50,7 @@ export function seccionLista({ titulo, items, ruta }: seccionList) {
             nombre={item.item.nombre}
             fondo={item.fondo}
             texto={item.texto}
+            imagen={item.imagen}
             onPress={() => navegarItems(item.item.nombre)}
           />
         ))}

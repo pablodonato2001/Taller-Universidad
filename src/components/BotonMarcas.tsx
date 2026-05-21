@@ -1,3 +1,4 @@
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { FC } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
@@ -7,6 +8,7 @@ type BotonMarcasProps = {
   fondo?: string;
   texto?: string;
   onPress: () => void;
+  imagen?: string;
 };
 
 export const BotonMarcas: FC<BotonMarcasProps> = ({
@@ -14,23 +16,29 @@ export const BotonMarcas: FC<BotonMarcasProps> = ({
   fondo = "#c6e9be",
   texto = "black",
   onPress,
+  imagen,
 }) => {
   return (
     <Pressable style={[styles.tarjeta]} onPress={onPress}>
-      <LinearGradient
-        colors={[fondo, "#ffffff"]}
-        start={{ x: 1, y: 1 }}
-        end={{ x: -1, y: -1 }}
-        style={styles.redondo}
-      >
-        <Text
-          style={{ color: texto, fontWeight: "bold", textAlign: "center" }}
-          adjustsFontSizeToFit
-          numberOfLines={1}
+      {imagen ? (
+        <Image source={imagen} style={styles.redondo} />
+      ) : (
+        <LinearGradient
+          colors={[fondo, "#ffffff"]}
+          start={{ x: 1, y: 1 }}
+          end={{ x: -1, y: -1 }}
+          style={styles.redondo}
         >
-          {nombre}
-        </Text>
-      </LinearGradient>
+          <Text
+            style={{ color: texto, fontWeight: "bold", textAlign: "center" }}
+            adjustsFontSizeToFit
+            numberOfLines={1}
+          >
+            {nombre}
+          </Text>
+        </LinearGradient>
+      )}
+
       <Text style={{ color: "black", fontWeight: "bold" }}> {nombre}</Text>
     </Pressable>
   );
@@ -62,5 +70,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
+    overflow: "hidden",
   },
 });
