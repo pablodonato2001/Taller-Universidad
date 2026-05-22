@@ -2,13 +2,10 @@ import { seccionLista } from "@/src/components/SeccionLista";
 import { categoriasD } from "@/src/data/categotia";
 import { etiquetasD } from "@/src/data/Etiqueta";
 import { marcasD } from "@/src/data/Marca";
-import { productosD } from "@/src/data/producto";
-import { buildRoute, ROUTES } from "@/src/navegation/routers";
-import { useRouter } from "expo-router";
+import { ROUTES } from "@/src/navegation/routers";
 import { ScrollView, StyleSheet, Text } from "react-native";
 
 export default function Home() {
-  const router = useRouter();
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text
@@ -44,14 +41,6 @@ export default function Home() {
         items: marcasD,
         ruta: ROUTES.BUSQUEDA,
       })}
-
-      <Text
-        onPress={() => {
-          router.push(buildRoute(ROUTES.PRODUCTO, { id: productosD[0].id }));
-        }}
-      >
-        Producto Prueba
-      </Text>
     </ScrollView>
   );
 }
