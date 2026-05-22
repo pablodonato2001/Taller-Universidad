@@ -39,7 +39,7 @@ export default function ProductoScreen() {
             fontWeight: "bold",
           }}
         >
-          {producto?.marca.item.nombre}
+          {producto?.marca}
         </Text>
         <Text
           style={{

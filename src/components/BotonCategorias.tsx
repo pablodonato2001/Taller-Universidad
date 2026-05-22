@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { FC } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -6,6 +7,7 @@ type BotonCategoriaProps = {
   nombre: string;
   fondo?: string;
   texto?: string;
+  icono?: keyof typeof Ionicons.glyphMap;
   onPress: () => void;
 };
 
@@ -13,6 +15,7 @@ export const BotonCategorias: FC<BotonCategoriaProps> = ({
   nombre,
   fondo = "black",
   texto = "white",
+  icono,
   onPress,
 }) => {
   return (
@@ -26,7 +29,11 @@ export const BotonCategorias: FC<BotonCategoriaProps> = ({
         <View
           style={{ flex: 1, justifyContent: "flex-end", flexDirection: "row" }}
         >
-          <Text>Icono</Text>
+          {icono ? (
+            <Ionicons name={icono} size={28} color={texto} />
+          ) : (
+            <Text>Icono</Text>
+          )}
         </View>
         <View style={{ flex: 3 }}></View>
         <View style={{ flex: 1, justifyContent: "flex-end" }}>

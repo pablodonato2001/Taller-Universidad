@@ -6,7 +6,8 @@ export const ROUTES = {
   ETIQUETA: "/etiqueta/[nombre]",
   MARCA: "/marca/[nombre]",
   PRODUCTO: "/producto/[id]",
-  FAVORITOS: "/favoritos",
+  FAVORITOS: "/(tabs)/favoritos",
+  BUSQUEDA: "/(tabs)/busqueda/[nombre]",
 } as const;
 
 export type AppRoute = (typeof ROUTES)[keyof typeof ROUTES];

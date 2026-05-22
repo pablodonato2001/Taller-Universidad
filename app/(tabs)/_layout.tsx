@@ -41,13 +41,21 @@ export default function TabsDemoLayout() {
         }}
       />
       <Tabs.Screen
-        name="busqueda"
+        name="busqueda/[nombre]"
         options={{
-          title: "busqueda",
-          headerTitle: "busqueda",
+          title: "Busqueda",
+          headerTitle: "Busqueda",
           tabBarLabel: "",
           tabBarActiveTintColor: "green",
           tabBarInactiveTintColor: "grey",
+          href: {
+            pathname: "/busqueda/[nombre]",
+            params: {
+              nombre: "Productos",
+              Tipo: "General",
+              Filtro: "General",
+            },
+          },
           tabBarIcon: ({ color, size, focused }) => (
             <View
               style={[

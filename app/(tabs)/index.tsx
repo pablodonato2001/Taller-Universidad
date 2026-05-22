@@ -32,17 +32,17 @@ export default function Home() {
       {seccionLista({
         titulo: "Categorias",
         items: categoriasD,
-        ruta: ROUTES.CATEGORIA,
+        ruta: ROUTES.BUSQUEDA,
       })}
       {seccionLista({
         titulo: "Etiquetas",
         items: etiquetasD,
-        ruta: ROUTES.ETIQUETA,
+        ruta: ROUTES.BUSQUEDA,
       })}
       {seccionLista({
         titulo: "Marcas",
         items: marcasD,
-        ruta: ROUTES.MARCA,
+        ruta: ROUTES.BUSQUEDA,
       })}
 
       <Text

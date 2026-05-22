@@ -34,8 +34,8 @@ export function seccionLista({ titulo, items, ruta }: seccionList) {
 
   const Boton = COMPONENTES_POR_TITULO[titulo] || BotonEtiquetas;
 
-  const navegarItems = (nombre: string) => {
-    router.push(buildRoute(ruta, { nombre: nombre }));
+  const navegarItems = (nombre: string, tipo: string, filtro: string) => {
+    router.push(buildRoute(ruta, { nombre: nombre, Tipo: tipo, Filtro: filtro }));
   };
 
   return (
@@ -51,7 +51,8 @@ export function seccionLista({ titulo, items, ruta }: seccionList) {
             fondo={item.fondo}
             texto={item.texto}
             imagen={item.imagen}
-            onPress={() => navegarItems(item.item.nombre)}
+            icono={(item as any).icono}
+            onPress={() => navegarItems(item.item.nombre, item.item.id, titulo)}
           />
         ))}
       </View>
