@@ -1,19 +1,48 @@
+import { ListaProductosPaginada } from "@/src/components/ListaProductosPaginada";
+import { useProductosPorEtiquetaPaginados } from "@/src/hooks/useProductosPorEtiquetaPaginados";
 import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
-type etiquetaParams = {
+type EtiquetaParams = {
   nombre: string;
 };
 
 export default function EtiquetaScreen() {
-  const { nombre } = useLocalSearchParams<etiquetaParams>();
+  const { nombre } = useLocalSearchParams<EtiquetaParams>();
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+    refetch,
+  } = useProductosPorEtiquetaPaginados(nombre);
+
+  const productos = data?.pages.flatMap((pagina) => pagina.productos) ?? [];
+  const cantidadTotal = data?.pages[0]?.cantidadTotal ?? 0;
+
+  const cargarMasProductos = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{nombre}</Text>
       <Text style={styles.description}>
-        Este es el apartado de {nombre} de esta etiqueta.
+        {isLoading ? "Buscando..." : `${cantidadTotal} productos encontrados`}
       </Text>
+
+      <ListaProductosPaginada
+        productos={productos}
+        onEndReached={cargarMasProductos}
+        estaCargandoMas={isFetchingNextPage}
+        estaError={isError}
+        onReintentar={refetch}
+      />
     </View>
   );
 }
@@ -21,20 +50,19 @@ export default function EtiquetaScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 24,
-    gap: 12,
-    backgroundColor: "#eff6ff",
+    padding: 20,
+    gap: 5,
+    backgroundColor: "#f3f4f5",
   },
   title: {
     fontSize: 32,
-    fontWeight: "700",
-    color: "#1d4ed8",
+    fontWeight: "bold",
+    color: "black",
+    textTransform: "capitalize",
   },
   description: {
     fontSize: 18,
-    textAlign: "center",
-    color: "#1e3a8a",
+    color: "#818181ff",
+    fontWeight: "bold",
   },
 });

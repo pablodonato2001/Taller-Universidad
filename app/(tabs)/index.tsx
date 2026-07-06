@@ -2,7 +2,6 @@ import { seccionLista } from "@/src/components/SeccionLista";
 import { categoriasD } from "@/src/data/categotia";
 import { etiquetasD } from "@/src/data/Etiqueta";
 import { marcasD } from "@/src/data/Marca";
-import { ROUTES } from "@/src/navegation/routers";
 import { ScrollView, StyleSheet, Text } from "react-native";
 
 export default function Home() {
@@ -26,21 +25,9 @@ export default function Home() {
         </Text>{" "}
         conciente
       </Text>
-      {seccionLista({
-        titulo: "Categorias",
-        items: categoriasD,
-        ruta: ROUTES.BUSQUEDA,
-      })}
-      {seccionLista({
-        titulo: "Etiquetas",
-        items: etiquetasD,
-        ruta: ROUTES.BUSQUEDA,
-      })}
-      {seccionLista({
-        titulo: "Marcas",
-        items: marcasD,
-        ruta: ROUTES.BUSQUEDA,
-      })}
+      {seccionLista({ titulo: "Categorias", items: categoriasD })}
+      {seccionLista({ titulo: "Etiquetas", items: etiquetasD })}
+      {seccionLista({ titulo: "Marcas", items: marcasD })}
     </ScrollView>
   );
 }

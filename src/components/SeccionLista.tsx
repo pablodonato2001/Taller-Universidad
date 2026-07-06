@@ -1,4 +1,4 @@
-import { AppRoute, buildRoute } from "@/src/navegation/routers";
+import { RUTAS, Ruta, construirRuta } from "@/src/navegacion/rutas";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import { BotonCategorias } from "./BotonCategorias";
@@ -20,7 +20,6 @@ type itemD = {
 type seccionList = {
   titulo: string;
   items: itemD[];
-  ruta: AppRoute;
 };
 
 const COMPONENTES_POR_TITULO: Record<string, React.FC<any>> = {
@@ -29,13 +28,20 @@ const COMPONENTES_POR_TITULO: Record<string, React.FC<any>> = {
   Marcas: BotonMarcas,
 };
 
-export function seccionLista({ titulo, items, ruta }: seccionList) {
+const RUTA_POR_TITULO: Record<string, Ruta> = {
+  Categorias: RUTAS.CATEGORIA,
+  Etiquetas: RUTAS.ETIQUETA,
+  Marcas: RUTAS.MARCA,
+};
+
+export function seccionLista({ titulo, items }: seccionList) {
   const router = useRouter();
 
   const Boton = COMPONENTES_POR_TITULO[titulo] || BotonEtiquetas;
+  const ruta = RUTA_POR_TITULO[titulo] || RUTAS.ETIQUETA;
 
-  const navegarItems = (nombre: string, tipo: string, filtro: string) => {
-    router.push(buildRoute(ruta, { nombre: nombre, Tipo: tipo, Filtro: filtro }));
+  const navegarItems = (nombre: string) => () => {
+    router.push(construirRuta(ruta, { nombre }));
   };
 
   return (
@@ -52,7 +58,7 @@ export function seccionLista({ titulo, items, ruta }: seccionList) {
             texto={item.texto}
             imagen={item.imagen}
             icono={(item as any).icono}
-            onPress={() => navegarItems(item.item.nombre, item.item.id, titulo)}
+            onPress={navegarItems(item.item.nombre)}
           />
         ))}
       </View>

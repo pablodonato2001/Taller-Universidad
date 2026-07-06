@@ -41,21 +41,13 @@ export default function TabsDemoLayout() {
         }}
       />
       <Tabs.Screen
-        name="busqueda/[nombre]"
+        name="buscar"
         options={{
           title: "Busqueda",
           headerTitle: "Busqueda",
           tabBarLabel: "",
           tabBarActiveTintColor: "green",
           tabBarInactiveTintColor: "grey",
-          href: {
-            pathname: "/busqueda/[nombre]",
-            params: {
-              nombre: "Productos",
-              Tipo: "General",
-              Filtro: "General",
-            },
-          },
           tabBarIcon: ({ color, size, focused }) => (
             <View
               style={[
@@ -72,37 +64,7 @@ export default function TabsDemoLayout() {
                 color={focused ? "white" : color}
               />
               {!focused && (
-                <Text style={[styles.texto, { color: color }]}>busqueda</Text>
-              )}
-            </View>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="favoritos"
-        options={{
-          title: "Favoritos",
-          headerTitle: "Favoritos",
-          tabBarLabel: "",
-          tabBarActiveTintColor: "green",
-          tabBarInactiveTintColor: "grey",
-          tabBarIcon: ({ color, size, focused }) => (
-            <View
-              style={[
-                styles.iconContainer,
-                {
-                  backgroundColor: focused ? color : "transparent",
-                  marginTop: size,
-                },
-              ]}
-            >
-              <Ionicons
-                name={focused ? "star" : "star-outline"}
-                size={size}
-                color={focused ? "white" : color}
-              />
-              {!focused && (
-                <Text style={[styles.texto, { color: color }]}>Favoritos</Text>
+                <Text style={[styles.texto, { color: color }]}>Busqueda</Text>
               )}
             </View>
           ),
